@@ -1,12 +1,4 @@
 {
-  "expo": {
-    "name": "ruang-meeting-app",
-    "slug": "ruang-meeting-app",
-    "sdkVersion": "54.0.0",
-    "version": "1.0.0",
-    "platforms": ["ios", "android", "web"],
-    "android": {
-      "package": "com.dhanuakun8.ruangmeetingapp"
-    }
-  }
+  "name": "rncliTemp",
+  "displayName": "rncliTemp"
 }

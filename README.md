@@ -24,14 +24,6 @@ npm install
 yarn
 ````
 
-2. Start Expo:
-
-```bash
-npm run start
-# or
-yarn start
-```
-
 3. Run on device/emulator (requires native toolchain):
 
 ```bash
@@ -45,4 +37,5 @@ Notes
 - The app entry is `App.js` (Expo will pick it up). If you need a bare workflow (pure React Native CLI) instead, I can prepare instructions.
 
 If anything fails during `npm install`, share the error and I will help diagnose.
+
 # ruang-meeting-app
