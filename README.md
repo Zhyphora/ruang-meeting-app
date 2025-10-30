@@ -1,41 +1,65 @@
-# Ruang Meeting (React Native CLI)
+# Ruang Meeting App
 
-How to run
+Clean React Native (CLI) app for meeting room reservations.
 
-1. Install dependencies with your package manager (npm or yarn). Example:
+## Requirements
 
-````bash
-cd /Volumes/project-danu/Technical-Test/technical-test-ftl
-npm install
-# or yarn
-# yarn install
-# Ruang Meeting (Expo-enabled)
+- Node 18+
+- Java 11+ and Android SDK (for Android)
+- Xcode (for iOS, optional on macOS)
 
-This project was adapted so you can start it with Expo.
-
-Quick start
-
-1. Install dependencies (npm or yarn):
+## Install
 
 ```bash
-cd /Volumes/project-danu/Technical-Test/technical-test-ftl
 npm install
-# or
-yarn
-````
+```
 
-3. Run on device/emulator (requires native toolchain):
+## Run (Android)
 
 ```bash
 npm run android
+```
+
+## Run (iOS)
+
+```bash
 npm run ios
 ```
 
-Notes
+## Tech
 
-- If you don't have the Expo CLI installed globally, the scripts use the local `expo` package (or you can run `npx expo start`).
-- The app entry is `App.js` (Expo will pick it up). If you need a bare workflow (pure React Native CLI) instead, I can prepare instructions.
+- React Native 0.71
+- React Navigation (native-stack)
+- Async Storage (@react-native-async-storage/async-storage)
+- Date/Time Picker (@react-native-community/datetimepicker)
+- Vector Icons (react-native-vector-icons)
 
-If anything fails during `npm install`, share the error and I will help diagnose.
+## Fonts
 
-# ruang-meeting-app
+Poppins is bundled locally via `assets/fonts` and linked with `react-native-asset`.
+
+## Project Structure
+
+```
+src/
+  components/       # Reusable UI (e.g., BookingModal, AlertBox)
+  context/          # AuthContext, BookingContext
+  screens/          # Splash, Login, Home, Schedule
+  services/         # api.js, auth.js
+  theme.js          # colors/spacing/typography
+```
+
+## Common tasks
+
+- Clean Android build: `cd android && ./gradlew clean`
+- Reset Metro cache: `npx react-native start --reset-cache`
+
+## Notes
+
+- Android targetSdk is set to 33 to avoid Android 14 broadcast restrictions during development.
+- Vector icons and Poppins fonts are already configured for Android.
+
+## Troubleshooting
+
+- Build error about `OutputFile`: removed legacy API from `android/app/build.gradle`.
+- If icons don't show, run: `npm run android` to rebuild native resources.
