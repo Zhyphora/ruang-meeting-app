@@ -9,7 +9,9 @@ import {
   Platform,
   ActivityIndicator,
 } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from "../context/AuthContext";
+import theme from "../theme";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("yosi@gmail.com");
@@ -51,34 +53,70 @@ export default function LoginScreen({ navigation }) {
       style={styles.wrapper}
       behavior={Platform.select({ ios: "padding", android: undefined })}
     >
+      <View style={styles.topBlob} />
+      <View style={styles.bottomBlob} />
+
       <View style={styles.container}>
-        <Text style={styles.header}>Ruangan Meeting</Text>
+        <View style={styles.brand}>
+          <View style={styles.logoCircle}>
+            <MaterialCommunityIcons
+              name="calendar-check"
+              size={26}
+              color="#fff"
+            />
+          </View>
+          <Text style={styles.header}>Ruang Meeting</Text>
+          <Text style={styles.subtitle}>Masuk untuk mengelola reservasi</Text>
+        </View>
+
         <View style={styles.card}>
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-            secureTextEntry
-          />
+          <View style={styles.inputRow}>
+            <MaterialCommunityIcons
+              name="email-outline"
+              size={20}
+              color="#6B7280"
+            />
+            <TextInput
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+              style={styles.input}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              placeholderTextColor="#9CA3AF"
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <MaterialCommunityIcons
+              name="lock-outline"
+              size={20}
+              color="#6B7280"
+            />
+            <TextInput
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+              style={styles.input}
+              secureTextEntry
+              placeholderTextColor="#9CA3AF"
+            />
+          </View>
+
           {error ? <Text style={styles.error}>{error}</Text> : null}
+
           <TouchableOpacity
             style={styles.button}
             onPress={submit}
             disabled={loading}
+            activeOpacity={0.9}
           >
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.buttonText}>Sign In</Text>
+              <>
+                <MaterialCommunityIcons name="login" size={18} color="#fff" />
+                <Text style={styles.buttonText}>Sign In</Text>
+              </>
             )}
           </TouchableOpacity>
         </View>
@@ -88,41 +126,104 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
+  wrapper: { flex: 1, backgroundColor: theme.colors.background },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    paddingHorizontal: 22,
   },
-  header: { fontSize: 24, fontWeight: "700", marginBottom: 20 },
+  brand: { alignItems: "center", marginBottom: 18 },
+  logoCircle: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#3558F4",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+    shadowColor: "#3558F4",
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 6,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "800",
+    color: "#1F2D3D",
+    fontFamily: theme.typography.fontFamilyBold,
+  },
+  subtitle: {
+    marginTop: 6,
+    color: theme.colors.muted,
+    fontFamily: theme.typography.fontFamilyRegular,
+  },
   card: {
-    width: "86%",
-    backgroundColor: "#f7f9fc",
-    padding: 20,
-    borderRadius: 8,
-    alignItems: "stretch",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#e2e8f0",
+    width: "100%",
     backgroundColor: "#fff",
-    padding: 12,
-    borderRadius: 6,
+    padding: 18,
+    borderRadius: 16,
+    alignItems: "stretch",
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 10 },
+    elevation: 6,
+  },
+  inputRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: theme.colors.subtleBorder,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    backgroundColor: "#fff",
     marginBottom: 12,
   },
+  input: {
+    flex: 1,
+    paddingVertical: 12,
+    marginLeft: 8,
+    color: "#111",
+    fontFamily: theme.typography.fontFamilyRegular,
+  },
   button: {
-    backgroundColor: "#2563eb",
+    backgroundColor: "#111827",
     padding: 14,
-    borderRadius: 6,
+    borderRadius: 12,
     alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 8,
+    marginTop: 6,
   },
   buttonText: {
     color: "#fff",
-    fontWeight: "600",
+    fontWeight: "700",
+    fontFamily: theme.typography.fontFamilySemiBold,
   },
   error: {
     color: "#b91c1c",
     marginBottom: 8,
+    fontFamily: theme.typography.fontFamilyRegular,
+  },
+  topBlob: {
+    position: "absolute",
+    top: -120,
+    right: -90,
+    width: 260,
+    height: 260,
+    borderRadius: 130,
+    backgroundColor: "#EEF3FF",
+  },
+  bottomBlob: {
+    position: "absolute",
+    bottom: -140,
+    left: -100,
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    backgroundColor: "#F6F8FF",
   },
 });

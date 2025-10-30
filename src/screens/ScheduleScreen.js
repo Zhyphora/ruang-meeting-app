@@ -13,23 +13,52 @@ export default function ScheduleScreen({ navigation }) {
   const items = [
     { time: "08:00 - 09:00", room: "Square Room" },
     { time: "09:00 - 10:00", room: "Square Room" },
+    { time: "10:00 - 11:00", room: "Lungles Room" },
   ];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Jadwal Ruang Meeting</Text>
+      <View style={styles.headerRow}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.title}>Jadwal Ruang Meeting</Text>
+          <Text style={styles.subtitle}>Agenda yang terjadwal hari ini</Text>
+        </View>
+        <TouchableOpacity
+          style={styles.closeBtn}
+          onPress={() => navigation.goBack()}
+          accessibilityLabel="Kembali"
+          activeOpacity={0.9}
+        >
+          <MaterialCommunityIcons
+            name="close"
+            size={18}
+            color={theme.colors.primary}
+          />
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.list}>
         {items.map((it, i) => (
           <View key={i} style={styles.item}>
-            <Text style={styles.itemTime}>{it.time}</Text>
-            <Text style={styles.itemRoom}>{it.room}</Text>
+            <View style={styles.itemIconWrap}>
+              <MaterialCommunityIcons
+                name="clock-outline"
+                size={18}
+                color="#111"
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.itemTime}>{it.time}</Text>
+              <Text style={styles.itemRoom}>{it.room}</Text>
+            </View>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={20}
+              color="#9CA3AF"
+            />
           </View>
         ))}
       </View>
-      <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()} activeOpacity={0.9}>
-        <MaterialCommunityIcons name="chevron-left" size={20} color={theme.colors.primary} />
-        <Text style={styles.backText}>Kembali</Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -40,16 +69,36 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     minHeight: "100%",
   },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
   title: {
     fontSize: theme.typography.h2,
     fontWeight: "800",
-    marginBottom: 12,
     color: "#1F2D3D",
+    fontFamily: theme.typography.fontFamilyBold,
+  },
+  subtitle: {
+    marginTop: 4,
+    color: theme.colors.muted,
+    fontFamily: theme.typography.fontFamilyRegular,
+  },
+  closeBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#EEF3FF",
+    marginLeft: 10,
   },
   list: { marginTop: 8 },
   item: {
     backgroundColor: theme.colors.card,
-    padding: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
     borderRadius: 12,
     marginBottom: 10,
     borderWidth: 1,
@@ -59,19 +108,26 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 6 },
     elevation: 2,
-  },
-  itemTime: { fontWeight: "700", color: "#111" },
-  itemRoom: { color: theme.colors.muted, marginTop: 4 },
-  back: {
-    alignSelf: "center",
-    backgroundColor: "#EEF3FF",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 999,
-    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
+    gap: 12,
   },
-  backText: { color: theme.colors.primary, fontWeight: "700" },
+  itemIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F3F4F6",
+  },
+  itemTime: {
+    fontWeight: "700",
+    color: "#111",
+    fontFamily: theme.typography.fontFamilySemiBold,
+  },
+  itemRoom: {
+    color: theme.colors.muted,
+    marginTop: 2,
+    fontFamily: theme.typography.fontFamilyRegular,
+  },
 });

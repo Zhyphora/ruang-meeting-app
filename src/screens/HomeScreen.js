@@ -32,8 +32,24 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.welcome}>{name}</Text>
           <Text style={styles.sub}>Admin Ruang Meeting</Text>
         </View>
-        <View style={styles.avatar}>
-          <MaterialCommunityIcons name="account" size={22} color="#3558F4" />
+        <View style={styles.headerRight}>
+          <View style={styles.avatar}>
+            <MaterialCommunityIcons name="account" size={22} color="#3558F4" />
+          </View>
+          <TouchableOpacity
+            style={styles.logoutIconBtn}
+            onPress={() => {
+              logout();
+              if (navigation && navigation.reset) {
+                navigation.reset({ index: 0, routes: [{ name: "Login" }] });
+              } else {
+                navigation?.replace?.("Login");
+              }
+            }}
+            accessibilityLabel="Logout"
+          >
+            <MaterialCommunityIcons name="logout" size={20} color="#ef4444" />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.body}>
@@ -126,11 +142,6 @@ export default function HomeScreen({ navigation }) {
           }}
         />
       </View>
-      <View style={styles.footer}>
-        <TouchableOpacity onPress={logout} style={styles.logout}>
-          <Text style={{ color: theme.colors.danger }}>Logout</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -148,6 +159,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#FFFFFF",
   },
+  headerRight: { flexDirection: "row", alignItems: "center", gap: 10 },
   hello: {
     color: theme.colors.muted,
     marginBottom: 2,
@@ -170,6 +182,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#EEF3FF",
     alignItems: "center",
     justifyContent: "center",
+  },
+  logoutIconBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FEF2F2",
+    borderWidth: 1,
+    borderColor: "#FEE2E2",
   },
   body: {
     padding: theme.spacing.page,
@@ -240,11 +262,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#FEF2F2",
     borderWidth: 1,
     borderColor: "#FEE2E2",
-  },
-  footer: {
-    padding: theme.spacing.page,
-  },
-  logout: {
-    alignItems: "center",
   },
 });
