@@ -75,6 +75,7 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={divisi ? styles.fieldText : styles.fieldPlaceholder}>
               {divisi || "Divisi"}
             </Text>
+            <Text style={styles.fieldIcon}>▾</Text>
           </TouchableOpacity>
           {showDivisiOptions && (
             <View style={styles.optionsBox}>
@@ -102,6 +103,7 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={room ? styles.fieldText : styles.fieldPlaceholder}>
               {room || "Ruang Meeting"}
             </Text>
+            <Text style={styles.fieldIcon}>▾</Text>
           </TouchableOpacity>
           {showRoomOptions && (
             <View style={styles.optionsBox}>
@@ -216,7 +218,7 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             style={styles.input}
           />
 
-          <TouchableOpacity style={styles.submit} onPress={submit}>
+          <TouchableOpacity style={styles.submit} onPress={submit} activeOpacity={0.9}>
             <Text style={styles.submitText}>Submit</Text>
           </TouchableOpacity>
 
@@ -232,28 +234,35 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: "rgba(0,0,0,0.35)",
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 12,
   },
   card: {
-    width: "92%",
+    width: "100%",
     backgroundColor: "#fff",
     padding: 18,
-    borderRadius: 14,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 10 },
+    elevation: 6,
   },
-  title: { fontSize: 18, fontWeight: "700", marginBottom: 12 },
+  title: { fontSize: 18, fontWeight: "800", marginBottom: 12, color: "#111" },
   input: {
     borderWidth: 1,
     borderColor: theme.colors.subtleBorder,
-    padding: 10,
-    borderRadius: 8,
+    padding: 12,
+    borderRadius: 12,
     marginTop: 8,
+    backgroundColor: "#fff",
   },
   field: {
     borderWidth: 1,
-    borderColor: "#F5D7D9",
-    padding: 12,
+    borderColor: "#E5E7EB",
+    padding: 14,
     borderRadius: 12,
     marginTop: 8,
     backgroundColor: "#fff",
@@ -263,23 +272,24 @@ const styles = StyleSheet.create({
   },
   fieldPlaceholder: { color: theme.colors.muted },
   fieldText: { color: "#111" },
-  fieldIcon: { marginLeft: 8 },
+  fieldIcon: { marginLeft: 8, opacity: 0.8 },
   optionsBox: {
     backgroundColor: "#fff",
     borderWidth: 1,
-    borderColor: "#F5D7D9",
-    borderRadius: 8,
+    borderColor: "#E5E7EB",
+    borderRadius: 12,
     marginTop: 6,
+    overflow: "hidden",
   },
-  option: { padding: 12, borderBottomWidth: 1, borderBottomColor: "#F5D7D9" },
+  option: { padding: 12, borderBottomWidth: 1, borderBottomColor: "#F3F4F6" },
   submit: {
-    backgroundColor: "#f3f4f6",
+    backgroundColor: "#3558F4",
     padding: 16,
     borderRadius: 12,
     marginTop: 18,
     alignItems: "center",
     width: "100%",
   },
-  submitText: { color: "#111", fontWeight: "600", fontSize: 18 },
+  submitText: { color: "#fff", fontWeight: "700", fontSize: 16 },
   close: { alignItems: "center", marginTop: 10 },
 });

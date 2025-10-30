@@ -26,32 +26,37 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <View>
+          <Text style={styles.hello}>Selamat datang,</Text>
           <Text style={styles.welcome}>{name}</Text>
           <Text style={styles.sub}>Admin Ruang Meeting</Text>
         </View>
       </View>
       <View style={styles.body}>
         <TouchableOpacity
-          style={styles.card}
+          style={[styles.card, styles.cardPrimary]}
           onPress={() => setModalVisible(true)}
+          activeOpacity={0.9}
         >
-          <Text style={styles.cardTitle}>Pesan Ruangan</Text>
+          <Text style={styles.cardEmoji}>🗓️</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.cardTitle}>Pesan Ruangan</Text>
+            <Text style={styles.cardDesc}>
+              Buat reservasi ruang meeting baru
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.card}
           onPress={() => navigation.navigate("Schedule")}
+          activeOpacity={0.9}
         >
-          <Text style={styles.cardTitle}>Jadwal Ruang Meeting</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.card}
-          onPress={() => {
-            setAlertMessage("Contoh notifikasi.");
-            setAlertType("info");
-            setAlertVisible(true);
-          }}
-        >
-          <Text style={styles.cardTitle}>Alert</Text>
+          <Text style={styles.cardEmoji}>📃</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.cardTitle}>Jadwal Ruang Meeting</Text>
+            <Text style={styles.cardDesc}>
+              Lihat agenda ruang meeting hari ini
+            </Text>
+          </View>
         </TouchableOpacity>
 
         <View style={{ height: 12 }} />
@@ -115,14 +120,20 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: theme.spacing.page,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f1f5f9",
+    paddingTop: theme.spacing.page + 6,
+    borderBottomWidth: 0,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "#EEF3FF",
+  },
+  hello: {
+    color: theme.colors.muted,
+    marginBottom: 2,
   },
   welcome: {
     fontSize: theme.typography.h2,
-    fontWeight: "700",
+    fontWeight: "800",
+    color: "#1F2D3D",
   },
   sub: {
     color: theme.colors.muted,
@@ -134,28 +145,51 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.card,
     padding: 18,
-    borderRadius: 10,
+    borderRadius: 14,
     marginBottom: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 3,
+  },
+  cardPrimary: {
+    backgroundColor: "#3558F4",
+  },
+  cardEmoji: {
+    fontSize: 24,
+    marginRight: 6,
+    opacity: 0.95,
   },
   cardTitle: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "700",
+    color: "#111",
+  },
+  cardDesc: {
+    marginTop: 2,
+    color: "#6B7280",
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: "800",
     marginTop: 8,
+    color: "#1F2D3D",
   },
   scheduleItem: {
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 10,
     backgroundColor: "#fff",
     marginTop: 8,
     borderWidth: 1,
     borderColor: theme.colors.subtleBorder,
   },
   scheduleTime: {
-    fontWeight: "600",
+    fontWeight: "700",
+    color: "#111",
   },
   scheduleRoom: {
     color: theme.colors.muted,
