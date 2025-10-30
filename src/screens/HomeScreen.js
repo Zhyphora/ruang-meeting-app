@@ -15,7 +15,8 @@ import AlertBox from "../components/AlertBox";
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
-  const { schedule, loading, error, addBooking } = useContext(BookingContext);
+  const { schedule, loading, error, addBooking, deleteBookingAt } =
+    useContext(BookingContext);
   const name = (user && user.name) || "Yosi";
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -93,11 +94,25 @@ export default function HomeScreen({ navigation }) {
           </Text>
         ) : (
           schedule.map((s, idx) => (
-            <View key={idx} style={styles.scheduleItem}>
-              <Text
-                style={styles.scheduleTime}
-              >{`${s.waktu_mulai} - ${s.waktu_selesai}`}</Text>
-              <Text style={styles.scheduleRoom}>{s.nama_ruangan}</Text>
+            <View key={idx} style={styles.scheduleItemRow}>
+              <View style={styles.scheduleItemLeft}>
+                <Text
+                  style={styles.scheduleTime}
+                >{`${s.waktu_mulai} - ${s.waktu_selesai}`}</Text>
+                <Text style={styles.scheduleRoom}>{s.nama_ruangan}</Text>
+              </View>
+              <TouchableOpacity
+                accessibilityLabel={`Hapus jadwal ${idx + 1}`}
+                onPress={() => deleteBookingAt(idx)}
+                style={styles.deleteBtn}
+                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              >
+                <MaterialCommunityIcons
+                  name="trash-can-outline"
+                  size={20}
+                  color="#ef4444"
+                />
+              </TouchableOpacity>
             </View>
           ))
         )}
@@ -195,7 +210,9 @@ const styles = StyleSheet.create({
     color: "#1F2D3D",
     fontFamily: theme.typography.fontFamilyBold,
   },
-  scheduleItem: {
+  scheduleItemRow: {
+    flexDirection: "row",
+    alignItems: "center",
     padding: 12,
     borderRadius: 10,
     backgroundColor: "#fff",
@@ -203,6 +220,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.subtleBorder,
   },
+  scheduleItemLeft: { flex: 1 },
   scheduleTime: {
     fontWeight: "700",
     color: "#111",
@@ -212,6 +230,16 @@ const styles = StyleSheet.create({
     color: theme.colors.muted,
     marginTop: 4,
     fontFamily: theme.typography.fontFamilyRegular,
+  },
+  deleteBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FEF2F2",
+    borderWidth: 1,
+    borderColor: "#FEE2E2",
   },
   footer: {
     padding: theme.spacing.page,

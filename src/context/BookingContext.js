@@ -7,6 +7,7 @@ export const BookingContext = createContext({
   loading: false,
   error: null,
   addBooking: async (item) => {},
+  deleteBookingAt: async (index) => {},
 });
 
 export function BookingProvider({ children }) {
@@ -61,8 +62,36 @@ export function BookingProvider({ children }) {
     });
   }, []);
 
+  const deleteBookingAt = useCallback(async (index) => {
+    setSchedule((prev) => {
+      if (index < 0 || index >= prev.length) return prev;
+      const target = prev[index];
+      const next = prev.filter((_, i) => i !== index);
+
+      // Try to remove from local storage if it exists there
+      setLocalBookings((prevLocal) => {
+        const localIndex = prevLocal.findIndex(
+          (b) => JSON.stringify(b) === JSON.stringify(target)
+        );
+        if (localIndex !== -1) {
+          const nextLocal = prevLocal.filter((_, i) => i !== localIndex);
+          AsyncStorage.setItem(
+            "local_bookings",
+            JSON.stringify(nextLocal)
+          ).catch(() => {});
+          return nextLocal;
+        }
+        return prevLocal;
+      });
+
+      return next;
+    });
+  }, []);
+
   return (
-    <BookingContext.Provider value={{ schedule, loading, error, addBooking }}>
+    <BookingContext.Provider
+      value={{ schedule, loading, error, addBooking, deleteBookingAt }}
+    >
       {children}
     </BookingContext.Provider>
   );
