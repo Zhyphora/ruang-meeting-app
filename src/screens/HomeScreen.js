@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import theme from "../theme";
 import { AuthContext } from "../context/AuthContext";
 import { BookingContext } from "../context/BookingContext";
@@ -25,10 +26,13 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text style={styles.hello}>Selamat datang,</Text>
           <Text style={styles.welcome}>{name}</Text>
           <Text style={styles.sub}>Admin Ruang Meeting</Text>
+        </View>
+        <View style={styles.avatar}>
+          <MaterialCommunityIcons name="account" size={22} color="#3558F4" />
         </View>
       </View>
       <View style={styles.body}>
@@ -37,20 +41,23 @@ export default function HomeScreen({ navigation }) {
           onPress={() => setModalVisible(true)}
           activeOpacity={0.9}
         >
-          <Text style={styles.cardEmoji}>🗓️</Text>
+          <MaterialCommunityIcons name="calendar-plus" size={24} color="#fff" />
           <View style={{ flex: 1 }}>
-            <Text style={styles.cardTitle}>Pesan Ruangan</Text>
-            <Text style={styles.cardDesc}>
+            <Text style={[styles.cardTitle, { color: "#fff" }]}>
+              Pesan Ruangan
+            </Text>
+            <Text style={[styles.cardDesc, { color: "#E7ECFF" }]}>
               Buat reservasi ruang meeting baru
             </Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.card}
           onPress={() => navigation.navigate("Schedule")}
           activeOpacity={0.9}
         >
-          <Text style={styles.cardEmoji}>📃</Text>
+          <MaterialCommunityIcons name="calendar-text" size={24} color="#111" />
           <View style={{ flex: 1 }}>
             <Text style={styles.cardTitle}>Jadwal Ruang Meeting</Text>
             <Text style={styles.cardDesc}>
@@ -124,19 +131,30 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#EEF3FF",
+    backgroundColor: "#FFFFFF",
   },
   hello: {
     color: theme.colors.muted,
     marginBottom: 2,
+    fontFamily: theme.typography.fontFamilyRegular,
   },
   welcome: {
     fontSize: theme.typography.h2,
-    fontWeight: "800",
+    fontWeight: "700",
     color: "#1F2D3D",
+    fontFamily: theme.typography.fontFamilyBold,
   },
   sub: {
     color: theme.colors.muted,
+    fontFamily: theme.typography.fontFamilyRegular,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#EEF3FF",
+    alignItems: "center",
+    justifyContent: "center",
   },
   body: {
     padding: theme.spacing.page,
@@ -159,25 +177,23 @@ const styles = StyleSheet.create({
   cardPrimary: {
     backgroundColor: "#3558F4",
   },
-  cardEmoji: {
-    fontSize: 24,
-    marginRight: 6,
-    opacity: 0.95,
-  },
   cardTitle: {
     fontSize: 16,
     fontWeight: "700",
     color: "#111",
+    fontFamily: theme.typography.fontFamilySemiBold,
   },
   cardDesc: {
     marginTop: 2,
     color: "#6B7280",
+    fontFamily: theme.typography.fontFamilyRegular,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: "800",
     marginTop: 8,
     color: "#1F2D3D",
+    fontFamily: theme.typography.fontFamilyBold,
   },
   scheduleItem: {
     padding: 12,
@@ -190,10 +206,12 @@ const styles = StyleSheet.create({
   scheduleTime: {
     fontWeight: "700",
     color: "#111",
+    fontFamily: theme.typography.fontFamilySemiBold,
   },
   scheduleRoom: {
     color: theme.colors.muted,
     marginTop: 4,
+    fontFamily: theme.typography.fontFamilyRegular,
   },
   footer: {
     padding: theme.spacing.page,

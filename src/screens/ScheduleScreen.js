@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import theme from "../theme";
 
 export default function ScheduleScreen({ navigation }) {
@@ -26,7 +27,8 @@ export default function ScheduleScreen({ navigation }) {
         ))}
       </View>
       <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()} activeOpacity={0.9}>
-        <Text style={styles.backText}>◀ Kembali</Text>
+        <MaterialCommunityIcons name="chevron-left" size={20} color={theme.colors.primary} />
+        <Text style={styles.backText}>Kembali</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -67,6 +69,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 999,
     marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
   },
   backText: { color: theme.colors.primary, fontWeight: "700" },
 });

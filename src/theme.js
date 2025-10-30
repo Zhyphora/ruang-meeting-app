@@ -19,6 +19,9 @@ export const typography = {
   h1: 24,
   h2: 20,
   body: 16,
+  fontFamilyRegular: "Poppins-Regular",
+  fontFamilySemiBold: "Poppins-SemiBold",
+  fontFamilyBold: "Poppins-Bold",
 };
 
 export default { colors, spacing, typography };

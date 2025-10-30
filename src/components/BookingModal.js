@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import theme from "../theme";
 
@@ -75,7 +76,11 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={divisi ? styles.fieldText : styles.fieldPlaceholder}>
               {divisi || "Divisi"}
             </Text>
-            <Text style={styles.fieldIcon}>▾</Text>
+            <MaterialCommunityIcons
+              name="chevron-down"
+              size={22}
+              color="#6B7280"
+            />
           </TouchableOpacity>
           {showDivisiOptions && (
             <View style={styles.optionsBox}>
@@ -103,7 +108,11 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={room ? styles.fieldText : styles.fieldPlaceholder}>
               {room || "Ruang Meeting"}
             </Text>
-            <Text style={styles.fieldIcon}>▾</Text>
+            <MaterialCommunityIcons
+              name="chevron-down"
+              size={22}
+              color="#6B7280"
+            />
           </TouchableOpacity>
           {showRoomOptions && (
             <View style={styles.optionsBox}>
@@ -133,7 +142,7 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={tanggal ? styles.fieldText : styles.fieldPlaceholder}>
               {tanggal || "Tanggal Meeting"}
             </Text>
-            <Text style={styles.fieldIcon}>📅</Text>
+            <MaterialCommunityIcons name="calendar" size={20} color="#6B7280" />
           </TouchableOpacity>
           {showTanggalPicker && (
             <DateTimePicker
@@ -162,7 +171,11 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={start ? styles.fieldText : styles.fieldPlaceholder}>
               {start || "Waktu Mulai"}
             </Text>
-            <Text style={styles.fieldIcon}>⏰</Text>
+            <MaterialCommunityIcons
+              name="clock-outline"
+              size={20}
+              color="#6B7280"
+            />
           </TouchableOpacity>
           {showStartPicker && (
             <DateTimePicker
@@ -191,7 +204,11 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             <Text style={end ? styles.fieldText : styles.fieldPlaceholder}>
               {end || "Waktu Selesai"}
             </Text>
-            <Text style={styles.fieldIcon}>⏰</Text>
+            <MaterialCommunityIcons
+              name="clock-outline"
+              size={20}
+              color="#6B7280"
+            />
           </TouchableOpacity>
           {showEndPicker && (
             <DateTimePicker
@@ -218,7 +235,11 @@ export default function BookingModal({ visible, onClose, onSubmit }) {
             style={styles.input}
           />
 
-          <TouchableOpacity style={styles.submit} onPress={submit} activeOpacity={0.9}>
+          <TouchableOpacity
+            style={styles.submit}
+            onPress={submit}
+            activeOpacity={0.9}
+          >
             <Text style={styles.submitText}>Submit</Text>
           </TouchableOpacity>
 
@@ -272,7 +293,6 @@ const styles = StyleSheet.create({
   },
   fieldPlaceholder: { color: theme.colors.muted },
   fieldText: { color: "#111" },
-  fieldIcon: { marginLeft: 8, opacity: 0.8 },
   optionsBox: {
     backgroundColor: "#fff",
     borderWidth: 1,
@@ -283,7 +303,7 @@ const styles = StyleSheet.create({
   },
   option: { padding: 12, borderBottomWidth: 1, borderBottomColor: "#F3F4F6" },
   submit: {
-    backgroundColor: "#3558F4",
+    backgroundColor: "#111827",
     padding: 16,
     borderRadius: 12,
     marginTop: 18,
